@@ -1,9 +1,0 @@
-# Este programa se queda sin energía.
-# Arréglalo añadiendo siesta; en el bucle.
-pilas 6;
-
-repite 5 {
-  chiva "Estoy currando: " + turno;
-}
-
-chiva "¡He llegado!";
