@@ -1,0 +1,11 @@
+pilas 16;
+pon a = 0;
+pon b = 1;
+
+repite 12 {
+  chiva a;
+  pon siguiente = a + b;
+  a = b;
+  b = siguiente;
+  siesta;
+}

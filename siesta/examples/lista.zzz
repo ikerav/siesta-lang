@@ -1,0 +1,10 @@
+pon compra = ["café", "pan", "una hamaca"];
+pon i = 0;
+
+mientras i < largo(compra) {
+  chiva "□ " + compra[i];
+  i = i + 1;
+  siesta;
+}
+
+chiva "Prioridades claras.";
