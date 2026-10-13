@@ -1,0 +1,18 @@
+pilas 20;
+
+repite 15 {
+  si turno % 3 == 0 y turno % 5 == 0 {
+    chiva "FizzSiesta";
+  } sino {
+    si turno % 3 == 0 {
+      chiva "Fizz";
+    } sino {
+      si turno % 5 == 0 {
+        chiva "Siesta";
+      } sino {
+        chiva turno;
+      }
+    }
+  }
+  siesta;
+}

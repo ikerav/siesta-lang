@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f4ee"><meta name="description" content="Siesta: un lenguaje de programación con derecho al descanso. Escribe, ejecuta y explora sus tokens, parser y evaluador en tu navegador.">
+<title>Siesta — código con derecho al descanso</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23d4c6f4'/%3E%3Ctext x='14' y='46' font-family='monospace' font-weight='bold' font-size='42' fill='%23272238'%3Ez%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="./style.css">
+<script type="module" src="./app.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./" aria-label="Siesta, inicio"><span class="brand-symbol">z<span>z</span></span><strong>siesta<span class="brand-dot">.</span></strong><span class="version">v1.0</span></a>
+  <nav aria-label="Principal"><button class="nav-link active" id="playground-nav">Playground</button><button class="nav-link" id="guide-nav">El lenguaje <span>↗</span></button></nav>
+  <span class="local-label"><i></i> Todo ocurre en tu navegador</span>
+</header>
+<div class="app-layout">
+<aside class="sidebar">
+  <div class="sidebar-title">TU RINCÓN DE CÓDIGO <span>↙</span></div>
+  <h1>Programa.<br>Respira.<br><em>Repite.</em></h1>
+  <p class="intro">Un pequeño lenguaje con una gran idea: hasta el código necesita descansar.</p>
+  <div class="section-label">PRUEBA UNA IDEA <span>06</span></div>
+  <div id="examples" class="example-list"></div>
+  <button id="new-program" class="new-program"><span>＋</span> Un lienzo en blanco</button>
+  <div class="concept-card"><span class="mini-sun">☀</span><strong>La productividad tiene límites.</strong><p>Cada instrucción gasta pilas.<br>Un <code>siesta;</code> y a seguir.</p><button id="concept-guide">Así funciona Siesta <span>→</span></button></div>
+  <div class="sidebar-bottom">HECHO PARA CURIOSOS.<br>SIN PRISA DESDE LA LÍNEA 1.</div>
+</aside>
+<main>
+  <section class="workspace-heading"><div><div class="eyebrow">EL PLAYGROUND</div><h2>Ideas frescas. Código tranquilo.</h2></div><span class="language-tag"><span>●</span> Siesta / .zzz</span></section>
+  <div class="workspace">
+    <section class="editor-pane" aria-label="Editor de código">
+      <div class="panel-toolbar"><div class="file-title"><span class="file-icon">≋</span> <span id="file-name">hola.zzz</span><span id="edited-dot" class="edited-dot" title="Cambios sin ejecutar" hidden></span></div><div class="editor-actions"><button class="icon-button" id="download" aria-label="Descargar programa .zzz" title="Descargar programa">↓</button><button class="icon-button" id="reset" aria-label="Restablecer ejemplo" title="Restablecer ejemplo">↺</button><button class="run-button" id="run"><span>▶</span> Ejecutar <kbd>Ctrl ↵</kbd></button></div></div>
+      <div class="code-area" id="code-area"><div id="line-numbers" class="line-numbers" aria-hidden="true"></div><div class="code-scroll"><pre id="highlight" aria-hidden="true"></pre><textarea id="editor" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" aria-label="Código Siesta" wrap="off" maxlength="50000"></textarea></div></div>
+      <div class="editor-footer"><span id="cursor-position">Lín 1, Col 1</span><span id="save-status">Guardado en este navegador</span><span>UTF-8 <span class="footer-divider">/</span> Siesta</span></div>
+    </section>
+    <section class="inspector" aria-label="Inspector del intérprete"><div class="inspector-heading"><span class="inspector-icon">⌘</span><strong>Bajo el capó</strong><span class="info-label">EN VIVO AL EJECUTAR</span></div><div class="pipeline"><span>Texto</span><b>→</b><span>Tokens</span><b>→</b><span>AST</span><b>→</b><span>¡Acción!</span></div><div class="inspector-tabs" role="tablist" aria-label="Inspector"><button role="tab" aria-selected="true" id="tab-variables" data-tab="variables">Variables</button><button role="tab" aria-selected="false" id="tab-tokens" data-tab="tokens">Tokens</button><button role="tab" aria-selected="false" id="tab-ast" data-tab="ast">Árbol AST</button><button role="tab" aria-selected="false" id="tab-trace" data-tab="trace">Traza</button></div><div id="inspector-body" class="inspector-body" role="tabpanel" aria-labelledby="tab-variables"></div><div class="inspector-foot"><span>↳</span> Un intérprete real. Paso a paso.</div></section>
+    <section class="console" aria-label="Consola"><div class="console-heading"><div><strong><span class="terminal-symbol">›_</span> Consola</strong><span id="result-status" class="result-status">Lista para ejecutar</span></div><button id="clear-console" class="text-button">Limpiar <span>⊘</span></button></div><div id="console-output" class="console-output" role="log" aria-live="polite"></div><div class="console-foot"><span id="run-summary">Tu código se ejecuta aquí.</span><span id="duration"></span></div></section>
+    <section class="battery-card" aria-label="Energía del programa"><div class="battery-heading"><span>LAS PILAS DEL PROGRAMA</span><span id="battery-state">CON ENERGÍA</span></div><div class="battery-main"><span class="battery-icon">ϟ</span><strong id="energy-value">40 <small>/ 40</small></strong><span class="battery-caption">unidades<br>disponibles</span></div><div class="battery-bar" id="battery-bar" aria-hidden="true"></div><div class="battery-bottom"><span><strong id="rest-count">0</strong> siestas reparadoras</span><code>siesta;</code></div></section>
+  </div>
+  <div class="workspace-note"><span>↳ &nbsp;Prueba a cambiar algo. Aquí se aprende trasteando.</span><button id="short-guide">Guía de bolsillo <span>↗</span></button></div>
+</main>
+</div>
+<footer class="page-footer"><span>siesta. <span>Menos estrés, más sintaxis.</span></span><span>Tokenizer <i>·</i> Parser <i>·</i> Evaluador <span class="footer-star">✳</span></span></footer>
+<dialog id="guide"><div class="dialog-top"><span class="eyebrow">GUÍA DE BOLSILLO</span><button id="close-guide" class="icon-button" aria-label="Cerrar guía">×</button></div><h2>Tu primer día en Siesta<span>.</span></h2><p class="guide-intro">Sintaxis en español, comentarios con <code>#</code> y una pausa cuando haga falta. Las instrucciones simples terminan en <code>;</code>.</p><div class="guide-grid">
+<article><h3>01 / Guarda y cuenta</h3><pre>pon nombre = "Ana";
+pon puntos = 3;
+puntos = puntos + 1;
+chiva "Hola, " + nombre;</pre><p><code>pon</code> declara. <code>=</code> cambia. <code>chiva</code> escribe en la consola. Textos, números, listas, <code>verdad</code>, <code>mentira</code> y <code>nada</code>.</p></article>
+<article><h3>02 / Decide y repite</h3><pre>si puntos >= 4 {
+  chiva "Bien hecho";
+} sino {
+  chiva "Otra vuelta";
+}
+repite 3 { chiva turno; }</pre><p><code>turno</code> cuenta desde 1. También existe <code>mientras condición { … }</code>. Lógica: <code>y</code>, <code>o</code>, <code>no</code>. Comparación: <code>== != &lt; &gt; &lt;= &gt;=</code>.</p></article>
+<article><h3>03 / Cocina una función</h3><pre>receta doble(n) {
+  sirve n * 2;
+}
+chiva doble(21); # 42</pre><p><code>receta</code> define una función. <code>sirve</code> devuelve un valor. Ámbito de bloque y cierres léxicos: cada receta recuerda dónde nació.</p></article>
+<article><h3>04 / El derecho al descanso</h3><pre>pilas 8;
+repite 10 {
+  chiva turno;
+  siesta;
+}</pre><p>Batería inicial: 40. <code>pilas N;</code> la configura (1–1.000), solo como primera instrucción. <code>siesta;</code> recarga gratis e instantáneamente.</p></article>
+</div><div class="guide-energy"><strong>¿Qué gasta energía?</strong><p>Una unidad por instrucción, otra por cada vuelta de bucle y otra por llamada a una receta o función incorporada. Las instrucciones del cuerpo también gastan. <code>pilas</code> y <code>siesta</code> no gastan. Si llegas a cero, aún puedes ejecutar <code>siesta;</code>; otra instrucción dará error.</p></div><div class="guide-builtins"><h3>Pequeñas herramientas incorporadas</h3><p><code>largo([1, 2])</code> → 2 &nbsp; <code>texto(42)</code> → "42" &nbsp; <code>numero("8")</code> → 8 &nbsp; <code>redondea(2.6)</code> → 3 &nbsp; <code>energia()</code> → pilas restantes tras pagar la llamada.</p><p>Listas: <code>pon cosas = ["pan", "café"];</code> · Acceso: <code>cosas[0]</code> · Aritmética: <code>+ - * / %</code>. Los índices empiezan en 0. Las condiciones exigen booleanos. Las listas se comparan por identidad.</p></div><p class="guide-limit">Las siestas recargan la batería, pero no eliminan el límite de 30.000 pasos internos. Así los bucles infinitos también se van a dormir.</p><button class="run-button" id="guide-done">A trastear →</button></dialog>
+<div id="toast" role="status" hidden></div>
+</body></html>
